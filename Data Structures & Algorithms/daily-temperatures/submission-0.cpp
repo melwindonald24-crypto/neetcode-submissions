@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+
+        int n=temperatures.size();
+        vector<int>hotDays(n,0);
+        stack<pair<int,int>>st;
+        for(int i=n-1;i>=0;i--)
+        {
+            while(!st.empty() && st.top().first<=temperatures[i])
+            {
+                st.pop();
+
+            }
+            if(st.empty())
+            {
+                hotDays[i]=0; 
+            }
+            else{
+                hotDays[i]=st.top().second-i;
+            }
+            st.push({temperatures[i],i});
+        }
+        return hotDays;
+        
+        
+    }
+};
